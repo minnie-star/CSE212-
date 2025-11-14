@@ -16,6 +16,7 @@
 /// </summary>
 public class Maze
 {
+    // TO SOLVE THE PROBLEM I GAVE BOOL VALUES TO ALL DIRECTIONS IN THE DICTIONARY.
     private readonly Dictionary<ValueTuple<int, int>, (bool left, bool right, bool up, bool down)> _mazeMap;
     private int _currX = 1;
     private int _currY = 1;
