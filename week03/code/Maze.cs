@@ -73,7 +73,7 @@ public class Maze
     public void MoveDown()
     {
         // FILL IN CODE
-        if(_mazeMap.ContainsKey((_currX, _currY)) || !_mazeMap[(_currX, _currY)][3])
+        if(!_mazeMap.ContainsKey((_currX, _currY)) || !_mazeMap[(_currX, _currY)][3])
         throw new InvalidOperationException("Can't go that way!");
 
         _currY += 1;
