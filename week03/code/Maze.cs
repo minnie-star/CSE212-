@@ -16,12 +16,12 @@
 /// </summary>
 public class Maze
 {
-    // TO SOLVE THE PROBLEM I GAVE BOOL VALUES TO ALL DIRECTIONS IN THE DICTIONARY.
-    private readonly Dictionary<ValueTuple<int, int>, (bool left, bool right, bool up, bool down)> _mazeMap;
+    
+    private readonly Dictionary<ValueTuple<int, int>, bool[]> _mazeMap;
     private int _currX = 1;
     private int _currY = 1;
 
-    public Maze(Dictionary<ValueTuple<int, int>, (bool left, bool right, bool up, bool down)> mazeMap)
+    public Maze(Dictionary<ValueTuple<int, int>, bool[]> mazeMap)
     {
         _mazeMap = mazeMap;
     }
@@ -34,7 +34,7 @@ public class Maze
     public void MoveLeft()
     {
         // FILL IN CODE
-        if (!_mazeMap.ContainsKey((_currX, _currY)) || !_mazeMap[(_currX, _currY)].left)
+        if (!_mazeMap.ContainsKey((_currX, _currY)) || !_mazeMap[(_currX, _currY)][0])
         throw new InvalidOperationException("Can't go that way!");
         
         _currX -= 1;
@@ -47,7 +47,7 @@ public class Maze
     public void MoveRight()
     {
         // FILL IN CODE
-        if (!_mazeMap.ContainsKey((_currX, _currY)) || !_mazeMap[(_currX, _currY)].right)
+        if (!_mazeMap.ContainsKey((_currX, _currY)) || !_mazeMap[(_currX, _currY)][1])
         throw new InvalidOperationException("Can't go that way!");
 
         _currY += 1;
@@ -60,7 +60,7 @@ public class Maze
     public void MoveUp()
     {
         // FILL IN CODE
-        if (!_mazeMap.ContainsKey((_currX, _currY)) || !_mazeMap[(_currX, _currY)].up)
+        if (!_mazeMap.ContainsKey((_currX, _currY)) || !_mazeMap[(_currX, _currY)][2])
         throw new InvalidOperationException("Can't go that way!");
 
         _currY -= 1;
@@ -73,7 +73,7 @@ public class Maze
     public void MoveDown()
     {
         // FILL IN CODE
-        if(_mazeMap.ContainsKey((_currX, _currY)) || !_mazeMap[(_currX, _currY)].down)
+        if(_mazeMap.ContainsKey((_currX, _currY)) || !_mazeMap[(_currX, _currY)][3])
         throw new InvalidOperationException("Can't go that way!");
 
         _currY += 1;

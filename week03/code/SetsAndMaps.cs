@@ -31,7 +31,10 @@ public static class SetsAndMaps
 
         foreach ( var word in words)
         {
-            if (word[0] == word[1])
+            if (word.Length != 2)
+                continue;
+
+                if (word[0] == word[1])
                 continue;
 
             string reversed = new string(new[] { word[1], word[0] });
@@ -115,6 +118,9 @@ public static class SetsAndMaps
         {
             char c = word1[i];
             if (charCount.ContainsKey(c))
+                charCount[c] += 1;
+
+                else
                 charCount[c] = 1;
         }
 
@@ -122,12 +128,13 @@ public static class SetsAndMaps
         {
             char c = word2[i];
             if (!charCount.ContainsKey(c))
-            {
-                charCount[c]--;
+            return false;
+
+            charCount[c]-= 1;
 
                 if (charCount[c] < 0)
                     return false;
-            }
+            
         }
 
         return true;
