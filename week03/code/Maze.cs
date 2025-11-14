@@ -50,7 +50,7 @@ public class Maze
         if (!_mazeMap.ContainsKey((_currX, _currY)) || !_mazeMap[(_currX, _currY)][1])
         throw new InvalidOperationException("Can't go that way!");
 
-        _currY += 1;
+        _currX += 1;
     }
 
     /// <summary>

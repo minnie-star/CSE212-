@@ -31,11 +31,10 @@ public static class SetsAndMaps
 
         foreach ( var word in words)
         {
-            if (word.Length != 2)
+            if (word.Length != 2 || word[0] == word[1])
                 continue;
 
-                if (word[0] == word[1])
-                continue;
+                
 
             string reversed = new string(new[] { word[1], word[0] });
             if (seen.Contains(reversed))
@@ -68,13 +67,13 @@ public static class SetsAndMaps
         {
             var fields = line.Split(",");
             // TODO Problem 2 - ADD YOUR CODE HERE
-            if (fields.Length > 3)
+            if (fields.Length > 4)
             {
                 string degree = fields[3].Trim();
 
                 if (degrees.ContainsKey(degree))
                 {
-                    degrees[degree]++;
+                    degrees[degree]+= 1;
                 }
                 else
                 {
@@ -114,31 +113,40 @@ public static class SetsAndMaps
 
         Dictionary<char, int> charCount = new Dictionary<char, int>();
 
+        int total1 = 0;
+        int total2 = 0;
+
         for (int i = 0; i < word1.Length; i++)
         {
             char c = word1[i];
-            if (charCount.ContainsKey(c))
-                charCount[c] += 1;
+            total1 += 1;
 
-                else
-                charCount[c] = 1;
+            if (charCount.ContainsKey(c))
+            charCount[c] += 1;
+
+            else
+            charCount[c] = 1;
         }
 
         for (int i = 0; i < word2.Length; i++)
         {
             char c = word2[i];
+            total2 += 1;
+
             if (!charCount.ContainsKey(c))
-            return false;
+                return false;
 
-            charCount[c]-= 1;
+            charCount[c] -= 1;
 
-                if (charCount[c] < 0)
-                    return false;
-            
+            if (charCount[c] < 0)
+                return false;
         }
 
-        return true;
+        if (total1 != total2)
+            return false;
 
+
+        return true;
     }
 
     /// <summary>
@@ -180,12 +188,16 @@ public static class SetsAndMaps
 
         foreach (var feature in featureCollection.Features)
         {
-            if (feature.Properties == null) continue;
+            if (feature.Properties == null) 
+                continue;
+
             var place = feature.Properties.Place;
             var mag = feature.Properties.Mag;
-            if (place == null || mag == null) continue;
 
-            results.Add($"Location: {place}. Magnitude: {mag}");
+            if (place == null || mag == null) 
+                continue;
+
+            results.Add($" {place} - Mag {mag}");
         }
         return results.ToArray();
     }
