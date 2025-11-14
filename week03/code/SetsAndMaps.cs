@@ -109,7 +109,7 @@ public static class SetsAndMaps
 
         Dictionary<char, int> charCount = new Dictionary<char, int>();
 
-        for (int i = 0; i < word1.Length; int++)
+        for (int i = 0; i < word1.Length; i++)
         {
             char c = word1[i];
             if (charCount.ContainsKey(c))
