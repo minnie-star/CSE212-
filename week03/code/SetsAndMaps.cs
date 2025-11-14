@@ -1,5 +1,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Common;
+using System.Runtime.Versioning;
+using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
 
 public static class SetsAndMaps
@@ -163,6 +165,21 @@ public static class SetsAndMaps
         // on those classes so that the call to Deserialize above works properly.
         // 2. Add code below to create a string out each place a earthquake has happened today and its magitude.
         // 3. Return an array of these string descriptions.
-        return [];
+
+
+        if (featureCollection == null || featureCollection.Features == null) return Array.Empty<string>();
+
+        var results = new List<string>();
+
+        foreach (var feature in featureCollection.Features)
+        {
+            if (feature.Properties == null) continue;
+            var place = feature.Properties.Place;
+            var mag = feature.Properties.Mag;
+            if (place == null || mag == null) continue;
+
+            results.Add($"Location: {place}. Magnitude: {mag}");
+        }
+        return results.ToArray();
     }
 }

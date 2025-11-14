@@ -16,11 +16,11 @@
 /// </summary>
 public class Maze
 {
-    private readonly Dictionary<ValueTuple<int, int>, bool[]> _mazeMap;
+    private readonly Dictionary<ValueTuple<int, int>, (bool left, bool right, bool up, bool down)> _mazeMap;
     private int _currX = 1;
     private int _currY = 1;
 
-    public Maze(Dictionary<ValueTuple<int, int>, bool[]> mazeMap)
+    public Maze(Dictionary<ValueTuple<int, int>, (bool left, bool right, bool up, bool down)> mazeMap)
     {
         _mazeMap = mazeMap;
     }
@@ -33,10 +33,10 @@ public class Maze
     public void MoveLeft()
     {
         // FILL IN CODE
-        if (!_mazeMap.ContainKey((currX, currY)) || !_mazeMap[(currX, currY)].left)
+        if (!_mazeMap.ContainsKey((_currX, _currY)) || !_mazeMap[(_currX, _currY)].left)
         throw new InvalidOperationException("Can't go that way!");
         
-        currx -= 1;
+        _currX -= 1;
     }
 
     /// <summary>
@@ -46,10 +46,10 @@ public class Maze
     public void MoveRight()
     {
         // FILL IN CODE
-        if (!_mazeMap.ContainsKey((currX, currY)) || !_mazeMap[(currX, currY)].right)
-        throw new InvalidOpreationException("Can't go that way!");
+        if (!_mazeMap.ContainsKey((_currX, _currY)) || !_mazeMap[(_currX, _currY)].right)
+        throw new InvalidOperationException("Can't go that way!");
 
-        currY += 1;
+        _currY += 1;
     }
 
     /// <summary>
@@ -59,10 +59,10 @@ public class Maze
     public void MoveUp()
     {
         // FILL IN CODE
-        if (!_mazeMap.ContainKey((currX, currY)) || !_mazeMap[(currX, currY)].up)
+        if (!_mazeMap.ContainsKey((_currX, _currY)) || !_mazeMap[(_currX, _currY)].up)
         throw new InvalidOperationException("Can't go that way!");
 
-        currY -= 1;
+        _currY -= 1;
     }
 
     /// <summary>
@@ -72,10 +72,10 @@ public class Maze
     public void MoveDown()
     {
         // FILL IN CODE
-        if(_mazeMap.containsKey((currX, currY)) || !_mazeMap[(currX, currY)].down)
-        throw new InvalidOperationExpception("Can't go that way!")
+        if(_mazeMap.ContainsKey((_currX, _currY)) || !_mazeMap[(_currX, _currY)].down)
+        throw new InvalidOperationException("Can't go that way!");
 
-        currY += 1;
+        _currY += 1;
     }
 
     public string GetStatus()
